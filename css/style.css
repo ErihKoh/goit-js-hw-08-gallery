@@ -82,6 +82,7 @@ body {
 .lightbox.is-open {
   opacity: 1;
   pointer-events: initial;
+  /* overflow-y: scroll; */
 }
 
 .lightbox__overlay {
