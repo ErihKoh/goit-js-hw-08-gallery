@@ -4,9 +4,11 @@ const imagesGallery = document.querySelector(".js-gallery");
 const imageModal = document.querySelector(".lightbox__content");
 const btnModalClose = document.querySelector(".lightbox__button");
 const overlay = document.querySelector(".js-lightbox");
+const backDrop = document.querySelector(".lightbox__overlay");
 
 imagesGallery.addEventListener("click", onImageGalleryClick);
 btnModalClose.addEventListener("click", onModalClose);
+backDrop.addEventListener("click", onBackdropClick);
 
 const cardsImage = creatGalleryMarkup(images);
 imagesGallery.insertAdjacentHTML("afterbegin", cardsImage);
@@ -43,21 +45,17 @@ function onImageGalleryClick(evt) {
             alt=${evt.target.alt}
         />
     </a>`;
-  console.log(`${evt.target.dataset.source}`);
 }
 
 function onModalClose(evt) {
   overlay.classList.remove("is-open");
 }
 
-// function onBackdropClick(evt) {
-//   if (evt.currentTarget === evt.target) {
-//     overlay.classList.remove("is-open");
-//   }
-
-//   console.log(evt.target);
-//   console.log(evt.currentTarget);
-// }
+function onBackdropClick(evt) {
+  if (evt.currentTarget === evt.target) {
+    onModalClose();
+  }
+}
 
 // function onEscKeyPress(event) {
 //   const ESC_KEY_CODE = "Escape";
