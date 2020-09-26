@@ -6,7 +6,7 @@ const btnModalClose = document.querySelector(".lightbox__button");
 const overlay = document.querySelector(".js-lightbox");
 const backDrop = document.querySelector(".lightbox__overlay");
 
-imagesGallery.addEventListener("click", onImageGalleryClick);
+imagesGallery.addEventListener("click", onImageOpenClick);
 btnModalClose.addEventListener("click", onModalClose);
 backDrop.addEventListener("click", onBackdropClick);
 
@@ -28,7 +28,8 @@ function creatGalleryMarkup(images) {
     .join("");
 }
 
-function onImageGalleryClick(evt) {
+function onImageOpenClick(evt) {
+  window.addEventListener("keydown", onEscKeyPress);
   const isGalleryImage = !evt.target.classList.contains("gallery__image");
   if (isGalleryImage) {
     return;
@@ -47,7 +48,8 @@ function onImageGalleryClick(evt) {
     </a>`;
 }
 
-function onModalClose(evt) {
+function onModalClose() {
+  window.removeEventListener("keydown", onEscKeyPress);
   overlay.classList.remove("is-open");
 }
 
@@ -57,11 +59,9 @@ function onBackdropClick(evt) {
   }
 }
 
-// function onEscKeyPress(event) {
-//   const ESC_KEY_CODE = "Escape";
-//   const isEscKey = event.code === ESC_KEY_CODE;
-
-//   if (isEscKey) {
-//     onModalClose();
-//   }
-// }
+function onEscKeyPress(evt) {
+  if (evt.code !== "Escape") {
+    return;
+  }
+  onModalClose();
+}
